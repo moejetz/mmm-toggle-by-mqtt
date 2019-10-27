@@ -1,0 +1,19 @@
+{
+  "name": "mmm-mqtt-avatar",
+  "version": "1.0.0",
+  "description": "Shows/hides MagicMirror modules on mqtt command",
+  "main": "mmm-toggle-by-mqtt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Magic",
+    "Mirror",
+    "MagicMirror"
+  ],
+  "author": "Moritz Kraus",
+  "license": "MIT",
+  "dependencies": {
+    "mqtt": "^3.0.0"
+  }
+}
