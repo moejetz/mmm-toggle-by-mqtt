@@ -4,7 +4,7 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 
 
 ## Short description
-Shows/hides modules based on mqtt command
+Shows/hides modules based on mqtt command and turns on/off hdmi display.
 
 ## External APIs
 none.
@@ -37,6 +37,7 @@ var config = {
 ```
 
 To show/hide all DOM elements, send command `show` or `hide` to the specified mqtt topic on the specified mqtt server.
+To turn the HDMI display on or off, send command `on` or `off` to the specified mqtt topic on the specified mqtt server.
 NOTE: this module will not ship with an mqtt server, you have to install and run it manually.
 
 ## Configuration options

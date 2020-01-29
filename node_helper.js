@@ -1,6 +1,6 @@
 /* Magic Mirror
- * Node Helper for module: mmm-mqtt-avatar
- * Repository URL: https://github.com/moejetz/mmm-toggle-by-presence
+ * Node Helper for module: mmm-toggle-by-mqtt
+ * Repository URL: https://github.com/moejetz/mmm-toggle-by-mqtt
  *
  * By Moritz Kraus
  * MIT Licensed.
@@ -8,6 +8,8 @@
 
 var NodeHelper = require('node_helper');
 var mqtt = require('mqtt');
+var shell = require('shelljs');
+shell.config.execPath = '/usr/bin/node';
 
 module.exports = NodeHelper.create({
 
@@ -52,7 +54,17 @@ module.exports = NodeHelper.create({
         });
 
         client.on('message', function (topic, message) {
-          self.publishState(self, message+'', topic);
+          message = message + '';
+          if(topic===self.config.mqttTopic) {
+              if(message==='on') {
+                  self.turnDisplayOn();
+              } else if(message==='off') {
+                  self.turnDisplayOff();
+              } else {
+                  self.publishState(self, message, topic);
+              }
+          }
+
         });
 	},
 
@@ -61,5 +73,15 @@ module.exports = NodeHelper.create({
     publishState: function(self, command, topic) {
         self.sendSocketNotification(this.config.socketNotificationKey, {command: command, topic: topic});
     },
+
+    // Turn display (hdmi) on
+    turnDisplayOn: function() {
+        shell.exec('vcgencmd display_power 1 >/dev/null 2>&1');
+    },
+
+    // Turn display (hdmi) off
+    turnDisplayOff: function() {
+        shell.exec('vcgencmd display_power 0 >/dev/null 2>&1');
+    }
 
 });
