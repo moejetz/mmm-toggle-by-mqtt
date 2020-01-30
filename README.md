@@ -16,7 +16,7 @@ No picture since there is no ui of this module.
 WIP.
 
 
-## Using the module
+## Installing the module
 
 * Clone this repository to `MagicMirror/modules/`
 * Run ```npm install``` inside the `MagicMirror/modules/mmm-toggle-by-mqtt` folder to install the module
@@ -35,12 +35,15 @@ var config = {
     ]
 }
 ```
-
-To show/hide all DOM elements, send command `show` or `hide` to the specified mqtt topic on the specified mqtt server.
-To turn the HDMI display on or off, send command `on` or `off` to the specified mqtt topic on the specified mqtt server.
-This can be used to save energy, e.g. turn off display at night.
-
 NOTE: this module will not ship with an mqtt server, you have to install and run it manually.
+
+
+## Using the module
+
+* To show/hide all DOM elements, send command `show` or `hide` to the specified mqtt topic on the specified mqtt server.
+* To turn the HDMI display on or off, send command `on` or `off` to the specified mqtt topic on the specified mqtt server.
+    * This can be used to save energy, e.g. turn off display at night.
+
 
 ## Configuration options
 
