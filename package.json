@@ -1,5 +1,5 @@
 {
-  "name": "mmm-mqtt-avatar",
+  "name": "mmm-toggle-by-mqtt",
   "version": "1.0.0",
   "description": "Shows/hides MagicMirror modules on mqtt command",
   "main": "mmm-toggle-by-mqtt.js",
