@@ -1,6 +1,6 @@
 {
   "name": "mmm-toggle-by-mqtt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shows/hides MagicMirror modules on mqtt command",
   "main": "mmm-toggle-by-mqtt.js",
   "scripts": {
@@ -14,7 +14,6 @@
   "author": "Moritz Kraus",
   "license": "MIT",
   "dependencies": {
-    "mqtt": "^3.0.0",
-    "shelljs": "^0.8.3"
+    "mqtt": "^3.0.0"
   }
 }

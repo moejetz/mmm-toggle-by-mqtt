@@ -8,8 +8,7 @@
 
 var NodeHelper = require('node_helper');
 var mqtt = require('mqtt');
-var shell = require('shelljs');
-shell.config.execPath = '/usr/bin/node';
+var { exec } = require('child_process');
 
 module.exports = NodeHelper.create({
 
@@ -76,12 +75,12 @@ module.exports = NodeHelper.create({
 
     // Turn display (hdmi) on
     turnDisplayOn: function() {
-        shell.exec('vcgencmd display_power 1 >/dev/null 2>&1');
+        exec('vcgencmd display_power 1 >/dev/null 2>&1');
     },
 
     // Turn display (hdmi) off
     turnDisplayOff: function() {
-        shell.exec('vcgencmd display_power 0 >/dev/null 2>&1');
+        exec('vcgencmd display_power 0 >/dev/null 2>&1');
     }
 
 });
