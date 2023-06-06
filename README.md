@@ -51,6 +51,8 @@ NOTE: this module will not ship with an mqtt server, you have to install and run
 | ------ | -------- | ----------- | ---- | -------
 | `mqttHost` | Optional | Hostname of mqtt server | _str_ | 'mqtt://localhost'
 | `mqttTopic` | Optional | MQTT topic to listen to | _str_ | 'mmmToggleByMqtt'
+| `mqttUsername` | Optional | MQTT broker username | _str_ | `NULL`
+| `mqttPassword` | Optional | MQTT broker password | _str_ | `NULL`
 
 
 # License: MIT

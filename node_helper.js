@@ -37,7 +37,7 @@ module.exports = NodeHelper.create({
     // Start mqtt client and register listener
   	startMqttListener: function () {
 
-    		var self = this;
+        var self = this;
 
         var host = '';
         if(self.config.mqttHost.includes('mqtt://')) {
@@ -46,7 +46,16 @@ module.exports = NodeHelper.create({
             host = 'mqtt://' + self.config.mqttHost;
         }
 
-        var client  = mqtt.connect(host);
+        var options = {};
+
+        if (self.config.mqttUsername) {
+            options.username = self.config.mqttUsername;
+        }
+        if (self.config.mqttPassword) {
+            options.password = self.config.mqttPassword;
+        }
+
+        var client  = mqtt.connect(host, options);
 
         client.on('connect', function () {
             client.subscribe(self.config.mqttTopic);
@@ -64,6 +73,10 @@ module.exports = NodeHelper.create({
                 }
             }
 
+        });
+
+        client.on('error', function (error) {
+            console.error(self.name + ' ' + error);
         });
   	},
 

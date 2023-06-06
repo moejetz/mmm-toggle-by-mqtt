@@ -11,7 +11,9 @@ Module.register('mmm-toggle-by-mqtt', {
 	defaults: {
 		socketNotificationKey: 'mmm-toggle-by-mqtt-notification-key',
 		mqttTopic: 'mmmToggleByMqtt',
-		mqttHost: "mqtt://localhost"
+		mqttHost: "mqtt://localhost",
+		mqttUsername: null,
+		mqttPassword: null,
 	},
 
 	command: "",
@@ -34,6 +36,8 @@ Module.register('mmm-toggle-by-mqtt', {
 		if(notification === this.config.socketNotificationKey) {
 			this.command = payload.command;
 			this.topic = payload.topic;
+			this.mqttUsername = payload.username;
+			this.mqttPassword = payload.password;
 			this.updateDom();
 		}
 	},
@@ -59,7 +63,4 @@ Module.register('mmm-toggle-by-mqtt', {
 
 		return document.createElement('div');
 	}
-
-
-
 });
