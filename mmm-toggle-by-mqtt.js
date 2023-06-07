@@ -51,14 +51,34 @@ Module.register('mmm-toggle-by-mqtt', {
 		if(self.topic === this.config.mqttTopic) {
 			console.log(this.name + ': MQTT command received: ', self.command);
 
-		    if(self.command === 'show') {
-				console.log(this.name + ': turn display modules ON...');
-				$('body').fadeIn(1000);
+			// Check to see if this is a module-specific request
+			const splittedMessage = self.command.split('=');
+			
+			if(splittedMessage.length > 1) {
+					const moduleName = splittedMessage[0].trim();
+					const state = splittedMessage[1].trim();
 
-		    } else if(self.command === 'hide') {
-	    		console.log(this.name + 'turn display modules OFF...');
-	    		$('body').fadeOut(1000);
-		    }
+				MM.getModules()
+					.exceptModule(this)
+					.enumerate(function (module) {
+						if(module.name !== moduleName) return;
+
+						if(state === 'show') {
+							module.show(1000);
+						} else if (state === 'hide') {
+							module.hide(1000);
+						}
+					});
+			}
+
+			if(self.command === 'show') {
+			console.log(this.name + ': turn display modules ON...');
+			$('body').fadeIn(1000);
+
+			} else if(self.command === 'hide') {
+				console.log(this.name + 'turn display modules OFF...');
+				$('body').fadeOut(1000);
+			}
 		}
 
 		return document.createElement('div');

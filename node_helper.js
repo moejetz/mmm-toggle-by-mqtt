@@ -58,6 +58,7 @@ module.exports = NodeHelper.create({
         var client  = mqtt.connect(host, options);
 
         client.on('connect', function () {
+            console.log('Connected to ' + self.config.mqttHost);
             client.subscribe(self.config.mqttTopic);
         });
 
