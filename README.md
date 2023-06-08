@@ -50,8 +50,8 @@ NOTE: this module will not ship with an mqtt server, you have to install and run
 
 | Option | Required | Description | Type | Default
 | ------ | -------- | ----------- | ---- | -------
-| `mqttHost` | Optional | Hostname of mqtt server | _str_ | 'mqtt://localhost'
-| `mqttTopic` | Optional | MQTT topic to listen to | _str_ | 'mmmToggleByMqtt'
+| `mqttHost` | Required | Hostname of mqtt server | _str_ | 'mqtt://localhost'
+| `mqttTopic` | Required | MQTT topic to listen to | _str_ | 'mmmToggleByMqtt'
 | `mqttUsername` | Optional | MQTT broker username | _str_ | `NULL`
 | `mqttPassword` | Optional | MQTT broker password | _str_ | `NULL`
 
