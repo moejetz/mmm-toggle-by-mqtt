@@ -41,6 +41,7 @@ NOTE: this module will not ship with an mqtt server, you have to install and run
 ## Using the module
 
 * To show/hide all DOM elements, send command `show` or `hide` to the specified mqtt topic on the specified mqtt server.
+* To show/hide a specific module, send command `MMM-my-module=show` or `MMM-my-module=hide` to the specified mqtt topic on the specified mqtt server.
 * To turn the HDMI display on or off, send command `on` or `off` to the specified mqtt topic on the specified mqtt server.
     * This can be used to save energy, e.g. turn off display at night.
 
@@ -51,6 +52,8 @@ NOTE: this module will not ship with an mqtt server, you have to install and run
 | ------ | -------- | ----------- | ---- | -------
 | `mqttHost` | Optional | Hostname of mqtt server | _str_ | 'mqtt://localhost'
 | `mqttTopic` | Optional | MQTT topic to listen to | _str_ | 'mmmToggleByMqtt'
+| `mqttUsername` | Optional | MQTT broker username | _str_ | `NULL`
+| `mqttPassword` | Optional | MQTT broker password | _str_ | `NULL`
 
 
 # License: MIT

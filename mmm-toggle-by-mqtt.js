@@ -11,7 +11,9 @@ Module.register('mmm-toggle-by-mqtt', {
 	defaults: {
 		socketNotificationKey: 'mmm-toggle-by-mqtt-notification-key',
 		mqttTopic: 'mmmToggleByMqtt',
-		mqttHost: "mqtt://localhost"
+		mqttHost: "mqtt://localhost",
+		mqttUsername: null,
+		mqttPassword: null,
 	},
 
 	command: "",
@@ -34,6 +36,8 @@ Module.register('mmm-toggle-by-mqtt', {
 		if(notification === this.config.socketNotificationKey) {
 			this.command = payload.command;
 			this.topic = payload.topic;
+			this.mqttUsername = payload.username;
+			this.mqttPassword = payload.password;
 			this.updateDom();
 		}
 	},
@@ -47,19 +51,36 @@ Module.register('mmm-toggle-by-mqtt', {
 		if(self.topic === this.config.mqttTopic) {
 			console.log(this.name + ': MQTT command received: ', self.command);
 
-		    if(self.command === 'show') {
-				console.log(this.name + ': turn display modules ON...');
-				$('body').fadeIn(1000);
+			// Check to see if this is a module-specific request
+			const splittedMessage = self.command.split('=');
+			
+			if(splittedMessage.length > 1) {
+					const moduleName = splittedMessage[0].trim();
+					const state = splittedMessage[1].trim();
 
-		    } else if(self.command === 'hide') {
-	    		console.log(this.name + 'turn display modules OFF...');
-	    		$('body').fadeOut(1000);
-		    }
+				MM.getModules()
+					.exceptModule(this)
+					.enumerate(function (module) {
+						if(module.name !== moduleName) return;
+
+						if(state === 'show') {
+							module.show(1000);
+						} else if (state === 'hide') {
+							module.hide(1000);
+						}
+					});
+			}
+
+			if(self.command === 'show') {
+			console.log(this.name + ': turn display modules ON...');
+			$('body').fadeIn(1000);
+
+			} else if(self.command === 'hide') {
+				console.log(this.name + 'turn display modules OFF...');
+				$('body').fadeOut(1000);
+			}
 		}
 
 		return document.createElement('div');
 	}
-
-
-
 });
